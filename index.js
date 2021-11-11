@@ -27,6 +27,19 @@ async function run (){
             res.send(products);
         })
 
+        //  Get Explore Api 
+
+        const database2 = client.db('camera_world2');
+        const exploreCollection = database2.collection('explore');
+ 
+        app.get ('/explore', async (req, res) =>{
+            const cursor = exploreCollection.find({});
+            const explore = await cursor.toArray();
+            res.send(explore);
+        })
+
+        
+
       
     }
     finally{
