@@ -17,26 +17,41 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run (){
     try{
         await client.connect();
+
+        // Get Products Api 
         const database = client.db('camera_world');
         const productCollection = database.collection('products');
 
-        // Get Products Api 
         app.get ('/products', async (req, res) =>{
             const cursor = productCollection.find({});
             const products = await cursor.toArray();
             res.send(products);
-        })
-
-        //  Get Explore Api 
+        }) 
+            
+        //  Get Explore Api
 
         const database2 = client.db('camera_world2');
         const exploreCollection = database2.collection('explore');
+
  
         app.get ('/explore', async (req, res) =>{
             const cursor = exploreCollection.find({});
             const explore = await cursor.toArray();
             res.send(explore);
         })
+
+        // Post Explore Api 
+
+        const databasePost = client.db('camera_worldPost');
+        const orderCollection = databasePost.collection('order');
+
+        app.post ('/order', async (req , res) => {
+            const exploreOrder = req.body;
+            const result =  await orderCollection.insertOne(exploreOrder);
+            console.log(result);
+            res.json(result)
+        })
+
 
         
 
