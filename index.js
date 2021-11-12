@@ -45,6 +45,15 @@ async function run (){
         const databasePost = client.db('camera_worldPost');
         const orderCollection = databasePost.collection('order');
 
+        app.get('/order', async (req, res) =>{
+            const email = req.query.email;
+            const query = {email:email}
+            console.log(query);
+            const cursor = orderCollection.find(query);
+            const order = await cursor.toArray();
+            res.json(order)
+        })
+
         app.post ('/order', async (req , res) => {
             const exploreOrder = req.body;
             const result =  await orderCollection.insertOne(exploreOrder);
