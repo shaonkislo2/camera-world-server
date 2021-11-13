@@ -103,7 +103,6 @@ async function run (){
             res.send(result);
             console.log(result);
         })
-      
     }
     finally{
         // await client.close();
