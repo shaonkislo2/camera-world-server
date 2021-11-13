@@ -85,6 +85,24 @@ async function run (){
             const result = await usersCollection.updateOne(filter, updateDoc)
             res.json(result);
         })
+
+        // Review Api 
+        const databaseReview = client.db('camera_worldReview');
+        const reviewCollection = databaseReview.collection('review');
+
+        app.post('/review', async(req, res) =>{
+            const result = await reviewCollection.insertOne(req.body);
+            res.send(result);
+            console.log(result);
+        })
+
+        // get all reviews
+
+        app.get('/allReview', async (req ,res) => {
+            const result = await reviewCollection.find({}).toArray();
+            res.send(result);
+            console.log(result);
+        })
       
     }
     finally{
