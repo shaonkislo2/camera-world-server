@@ -44,6 +44,7 @@ async function run (){
 
         const databasePost = client.db('camera_worldPost');
         const orderCollection = databasePost.collection('order');
+        const usersCollection = databasePost.collection('users');
 
         app.get('/order', async (req, res) =>{
             const email = req.query.email;
@@ -57,9 +58,17 @@ async function run (){
         app.post ('/order', async (req , res) => {
             const exploreOrder = req.body;
             const result =  await orderCollection.insertOne(exploreOrder);
+            res.json(result)
+        })
+
+        app.post('/users', async(req, res) =>{
+            const user = req.body;
+            const result = await usersCollection.insertOne(user);           
             console.log(result);
             res.json(result)
         })
+
+        
 
       
     }
