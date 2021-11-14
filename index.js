@@ -42,7 +42,7 @@ async function run (){
             res.send(explore);
         })
 
-        // Post Explore Api 
+         //  Post Explore  Api 
 
         const databasePost = client.db('camera_worldPost');
         const orderCollection = databasePost.collection('order');
@@ -63,7 +63,7 @@ async function run (){
             res.json(result)
         })
 
-        // Delete Api 
+         // Delete Api 
 
         app.delete('/order/:id', async (req, res) =>{
             const id = req.params.id;
