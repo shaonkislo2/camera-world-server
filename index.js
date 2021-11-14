@@ -128,5 +128,5 @@ app.get('/', (req, res) => {
   })
 
   app.listen(port, () => {
-    console.log('Running Surver on port',  port)
+    console.log('Running Server on port',  port )
 })  
